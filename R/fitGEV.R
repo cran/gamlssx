@@ -1,6 +1,8 @@
 #' Fit a Generalized Extreme value (GEV) GAMLSS Model
 #'
-#' Describe
+#' Fits a Generalized Additive Model (GAM) for Location, Scale and Shape with
+#' a GEV response distribution, using the function
+#' [`gamlss::gamlss()`][`gamlss::gamlss`].
 #'
 #' @inheritParams gamlss::gamlss
 #'
@@ -52,7 +54,7 @@
 #'   [`gamlss.dist::gamlss.family()`][`gamlss.dist::gamlss.family`],
 #'   [`gamlss::gamlss()`][`gamlss::gamlss`]
 #' @examples
-#' # Load gamlss, for the function pb()
+#' # Load gamlss, for the functions term.plot() and wp()
 #' library(gamlss)
 #'
 #' ##### Simulated data
@@ -68,7 +70,7 @@
 #' plot(x, y)
 #'
 #' # Fit model using the default RS method with Fisher's scoring
-#' mod <- fitGEV(y ~ gamlss::pb(x), data = data)
+#' mod <- fitGEV(y ~ pb(x), data = data)
 #' # Summary of model fit
 #' summary(mod)
 #' # Residual diagnostic plots
@@ -145,7 +147,7 @@ fitGEV <- function(formula, data, scoring = c("fisher", "quasi"),
       GEVquasi(mu.link = mu.link, sigma.link = sigma.link, nu.link = xi.link)
       )
   }
-  # Add the link functions to the call to gamlss() in fisherFit()
+  # Add the link functions to the call to gamlss() in templateFit()
   templateFit <- function(formula, stepLength, data, ...) {
     dangerous <- NULL
     return(dangerous)
